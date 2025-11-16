@@ -26,14 +26,14 @@ body {
     width: 50px; 
     height: 50px;
     border-radius: 50%;
-    border: 2px solid #003cffff;
+    border: 2px solid #FF9900;
     image-rendering: pixelated; 
 }
 
 .premiere-header h1 {
     margin: 0;
     font-size: 1.5em;
-    color: #003cffff;
+    color: #FF9900;
     text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
 }
 
@@ -87,7 +87,7 @@ body {
     margin: 5px 0 15px;
     height: 20px;
     overflow: hidden;
-    border: 1px solid #003cffff; 
+    border: 1px solid #FF9900; 
 }
 
 .level-bar {
@@ -108,7 +108,7 @@ body {
 label {
     display: block;
     margin-top: 10px;
-    color: #003cffff;
+    color: #FF9900;
     font-weight: bold;
     text-shadow: 1px 1px 0px rgba(0,0,0,0.3);
 }
@@ -250,7 +250,7 @@ input[type="text"], input[type="number"], select {
 .bonus-list input[type="checkbox"] {
     margin-right: 10px;
     transform: scale(1.2); 
-    accent-color: #003cffff; 
+    accent-color: #FF9900; 
 }
 
 .xp-badge {
@@ -283,7 +283,7 @@ input[type="text"], input[type="number"], select {
 
 /* Pastikan ikon di list dan heading yang tersisa tetap terlihat */
 .panel h2 .fas, .panel h3 .fas, .premiere-header h1 .fas {
-    color: #003cffff; 
+    color: #FF9900; 
 }
 /* style.css (Hanya bagian yang ditambahkan/diubah, sisanya dari revisi sebelumnya tetap sama) */
 
@@ -318,11 +318,11 @@ input[type="text"], input[type="number"], select {
     box-shadow: 0 0 20px rgba(255, 153, 0, 0.5); /* Glowing border */
     max-width: 400px;
     width: 90%;
-    border: 2px solid #003cffff;
+    border: 2px solid #FF9900;
 }
 
 #modalTitle {
-    color: #003cffff;
+    color: #FF9900;
     border-bottom: 1px solid #5a5a5a;
     padding-bottom: 10px;
     margin-bottom: 15px;

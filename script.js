@@ -1,20 +1,10 @@
 // script.js
-
-// --- 1. KONFIGURASI GLOBAL ---
+// --- KONFIGURASI GLOBAL ---
 const MAX_LEVEL = 100;
 const BASE_XP_NEXT_LEVEL = 100;
 const XP_MULTIPLIER = 1.15; 
 
-// DEFAULT CONTENT TYPES
-const DEFAULT_CONTENT_TYPES = [
-    { name: "Minecraft Hardcore", xp: 150, category: "Minecraft" },
-    { name: "Shorts Video", xp: 30, category: "Pendek" },
-    { name: "100 Hari Minecraft", xp: 250, category: "Minecraft" },
-    { name: "Post Komunitas", xp: 10, category: "Komunitas" },
-    { name: "Random Minecraft Video", xp: 100, category: "Minecraft" }
-];
-
-// MASTER LIST DARI SEMUA QUESTS
+// --- DAFTAR SEMUA QUESTS (Sama) ---
 const ALL_QUESTS_MASTER = [
     { id: 101, title: "Luncurkan Trailer Seri Baru", xp: 1000 },
     { id: 102, title: "Kolaborasi dengan Kreator Lain", xp: 1500 },
@@ -53,8 +43,7 @@ const ALL_QUESTS_MASTER = [
     { id: 135, title: "Jadikan Video Tertentu *Unlisted*", xp: 30 }
 ];
 
-// --- 2. FUNGSI UTILITY QUEST & STATE AWAL ---
-
+// --- FUNGSI UTILITY QUEST (Sama) ---
 function getRandomQuests(count, currentQuests) {
     const currentIds = currentQuests.map(q => q.id);
     const availableQuests = ALL_QUESTS_MASTER.filter(q => !currentIds.includes(q.id));
@@ -77,15 +66,25 @@ function getRandomQuests(count, currentQuests) {
     return questsToAdd;
 }
 
+// --- DEFAULT CONTENT TYPES BARU ---
+const DEFAULT_CONTENT_TYPES = [
+    { name: "Minecraft Hardcore", xp: 150, category: "Minecraft" },
+    { name: "Shorts Video", xp: 30, category: "Pendek" },
+    { name: "100 Hari Minecraft", xp: 250, category: "Minecraft" },
+    { name: "Post Komunitas", xp: 10, category: "Komunitas" },
+    { name: "Random Minecraft Video", xp: 100, category: "Minecraft" }
+];
+
+// --- STATE AWAL ---
 let state = {
     level: 1,
     xp: 0,
     history: [], 
-    contentTypes: DEFAULT_CONTENT_TYPES,
+    contentTypes: DEFAULT_CONTENT_TYPES, // Menggunakan default baru
     bonusMissions: [] // Akan diinisialisasi di loadState
 };
 
-// --- 3. CUSTOM MODAL FUNCTIONS ---
+// ... (Kode showModal, showNotification, getXPForNextLevel, updateLevelProgress, deleteContent, setXPManually tetap sama) ...
 const modalOverlay = document.getElementById('customModal');
 const modalMessage = document.getElementById('modalMessage');
 const modalActions = document.getElementById('modalActions');
@@ -99,7 +98,7 @@ function showModal(message, title = 'Notifikasi', buttons) {
     buttons.forEach(btnConfig => {
         const button = document.createElement('button');
         button.className = `modal-btn ${btnConfig.className}`;
-        button.style.fontSize = '0'; // Penting agar gambar tombol terlihat jelas
+        button.style.fontSize = '0'; 
         
         button.addEventListener('click', () => {
             modalOverlay.classList.remove('active');
@@ -120,8 +119,6 @@ function showNotification(message, title = 'Notifikasi') {
         action: () => {} 
     }]);
 }
-
-// --- 4. CORE LOGIC FUNCTIONS ---
 
 function getXPForNextLevel(level) {
     if (level >= MAX_LEVEL) return Infinity;
@@ -202,9 +199,33 @@ function deleteContent(index) {
     }
 }
 
+function setXPManually() {
+    const inputEl = document.getElementById('manualXPInput');
+    const newTotalXP = parseInt(inputEl.value);
+
+    if (isNaN(newTotalXP) || newTotalXP < 0) {
+        showNotification("Masukkan nilai XP total yang valid (angka positif).");
+        inputEl.placeholder = 'Set total XP Points';
+        return;
+    }
+    
+    state.level = 1; 
+    state.xp = newTotalXP;
+
+    updateLevelProgress(); 
+    
+    saveState();
+    showNotification(`XP berhasil diatur menjadi ${newTotalXP}. Level dan progres dihitung ulang.`);
+    inputEl.value = '';
+}
+// ----------------------------------------------------------------------
+
+
+// --- FUNGSI BARU: Hapus Jenis Konten ---
 function deleteContentType(index) {
     const typeToDelete = state.contentTypes[index];
 
+    // Cek apakah jenis konten yang akan dihapus adalah jenis konten default (yang tidak boleh dihapus)
     const isDefault = DEFAULT_CONTENT_TYPES.some(d => d.name === typeToDelete.name);
     
     if (isDefault) {
@@ -234,27 +255,8 @@ function deleteContentType(index) {
     );
 }
 
-function setXPManually() {
-    const inputEl = document.getElementById('manualXPInput');
-    const newTotalXP = parseInt(inputEl.value);
 
-    if (isNaN(newTotalXP) || newTotalXP < 0) {
-        showNotification("Masukkan nilai XP total yang valid (angka positif).");
-        inputEl.placeholder = 'Set total XP Points';
-        return;
-    }
-    
-    state.level = 1; 
-    state.xp = newTotalXP;
-
-    updateLevelProgress(); 
-    
-    saveState();
-    showNotification(`XP berhasil diatur menjadi ${newTotalXP}. Level dan progres dihitung ulang.`);
-    inputEl.value = '';
-}
-
-// --- 5. UI RENDERING FUNCTIONS ---
+// --- FUNGSI UI RENDERING ---
 
 function renderContentTypes() {
     const selectEl = document.getElementById('contentType');
@@ -274,12 +276,15 @@ function renderActiveTypesList() {
     state.contentTypes.forEach((type, index) => {
         const li = document.createElement('li');
         
+        // Tentukan apakah jenis konten ini adalah default
         const isDefault = DEFAULT_CONTENT_TYPES.some(d => d.name === type.name);
         
+        // Tambahkan tombol hapus hanya jika BUKAN default
         let deleteBtnHtml = '';
         if (!isDefault) {
-            deleteBtnHtml = `<button class="delete-type-btn" data-index="${index}" title="Hapus Jenis Konten Kustom"></button>`;
+            deleteBtnHtml = `<button class="delete-type-btn" data-index="${index}">Hapus</button>`;
         } else {
+            // Beri label Default untuk konten bawaan
             deleteBtnHtml = `<span style="color: #FF9900; font-style: italic;">(Default)</span>`;
         }
         
@@ -333,7 +338,8 @@ function renderUI() {
     renderBonusMissions();
 }
 
-// --- 6. SAVE/LOAD PROGRESS ---
+
+// --- SAVE/LOAD PROGRESS ---
 
 function saveState() {
     localStorage.setItem('creatorTrackerState', JSON.stringify(state));
@@ -345,10 +351,11 @@ function loadState() {
     if (savedState) {
         const importedState = JSON.parse(savedState);
         
-        // Cek dan integrasikan contentTypes (memastikan default types baru ada)
+        // Cek dan ganti contentTypes lama dengan default baru jika data lama tidak ada
         if (!importedState.contentTypes || importedState.contentTypes.length === 0) {
             importedState.contentTypes = DEFAULT_CONTENT_TYPES;
         } else {
+            // Memastikan jenis default yang baru ditambahkan ada jika save lama dimuat
             const savedTypeNames = importedState.contentTypes.map(t => t.name);
             DEFAULT_CONTENT_TYPES.forEach(defaultType => {
                 if (!savedTypeNames.includes(defaultType.name)) {
@@ -357,23 +364,22 @@ function loadState() {
             });
         }
         
-        // Inisialisasi/cek missions
         if (!importedState.bonusMissions || importedState.bonusMissions.length === 0) {
             importedState.bonusMissions = getRandomQuests(3, []);
         }
 
         state = importedState;
     } else {
-        // Jika tidak ada save, inisialisasi awal
+        // Jika tidak ada save, pastikan 3 quest awal dibuat
         state.contentTypes = DEFAULT_CONTENT_TYPES;
         state.bonusMissions = getRandomQuests(3, []);
     }
     renderUI();
 }
 
-// --- 7. EVENT HANDLERS ---
 
-// Handle Form Submission Konten
+// --- EVENT HANDLERS ---
+
 document.getElementById('contentForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -397,7 +403,6 @@ document.getElementById('contentForm').addEventListener('submit', function(e) {
 });
 
 
-// Handle Misi Bonus (Check/Uncheck, Randomizer)
 document.getElementById('bonusMissions').addEventListener('change', function(e) {
     if (e.target.type === 'checkbox') {
         const missionId = parseInt(e.target.dataset.id);
@@ -455,7 +460,6 @@ document.getElementById('bonusMissions').addEventListener('change', function(e) 
     }
 });
 
-// Handle Form Custom Content Type
 document.getElementById('customTypeForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -484,7 +488,7 @@ document.getElementById('customTypeForm').addEventListener('submit', function(e)
     }
 });
 
-// Event Handler Hapus Jenis Konten Kustom
+// Event Handler untuk Hapus Jenis Konten Kustom
 document.getElementById('activeTypesList').addEventListener('click', function(e) {
     const deleteBtn = e.target.closest('.delete-type-btn');
     if (deleteBtn) {
@@ -493,7 +497,6 @@ document.getElementById('activeTypesList').addEventListener('click', function(e)
     }
 });
 
-// Event Handler Hapus Konten dari Log
 document.getElementById('historyList').addEventListener('click', function(e) {
     const deleteBtn = e.target.closest('.delete-btn');
     if (deleteBtn) {
@@ -502,10 +505,8 @@ document.getElementById('historyList').addEventListener('click', function(e) {
     }
 });
 
-// Event Handler Set XP Manual
 document.getElementById('setXPButton').addEventListener('click', setXPManually);
 
-// Event Handler Export Data
 document.getElementById('exportData').addEventListener('click', () => {
     const dataStr = JSON.stringify(state, null, 2);
     const blob = new Blob([dataStr], { type: "application/json" });
@@ -521,7 +522,6 @@ document.getElementById('exportData').addEventListener('click', () => {
     showNotification('Data berhasil diekspor. File JSON telah diunduh.', 'Ekspor Selesai');
 });
 
-// Event Handler Import Data
 document.getElementById('importData').addEventListener('click', () => {
     const input = document.createElement('input');
     input.type = 'file';
@@ -570,7 +570,7 @@ document.getElementById('importData').addEventListener('click', () => {
 });
 
 
-// --- 8. Inisialisasi ---
+// --- Inisialisasi ---
 document.addEventListener('DOMContentLoaded', () => {
     loadState();
 });
