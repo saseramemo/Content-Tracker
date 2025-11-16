@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Gamifikasi Upload Konten (Premiere Pro + Minecraft)</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="premiere-header">
+            <div class="header-left">
+                <img src="assets/Icon Sasera.png" alt="Icon Sasera" class="sasera-icon">
+                <h1><i class="fas fa-hammer"></i> My Content Tracker</h1>
+            </div>
+            <div class="save-controls">
+                <button id="exportData" class="control-btn export-btn-custom"></button>
+                <button id="importData" class="control-btn import-btn-custom"></button>
+            </div>
+        </header>
+
+        <main class="premiere-layout">
+            <section class="panel panel-info">
+                <h2><i class="fas fa-star"></i> My Progress</h2>
+                <div class="level-display">
+                    <p>Level: <span id="currentLevel">1</span> / 100</p>
+                    <div class="level-bar-container">
+                        <div id="levelBar" class="level-bar" style="width: 0%;"></div>
+                    </div>
+                    <p>XP: <span id="currentXP">0</span> / <span id="xpToNextLevel">100</span></p>
+                </div>
+                
+                <hr>
+                
+                <h2><i class="fas fa-tools"></i> Manual XP Points</h2>
+                <div class="set-xp-control">
+                    <input type="number" id="manualXPInput" placeholder="Set total XP Points">
+                    <button id="setXPButton" class="premiere-btn set-xp-btn"></button>
+                </div>
+                <hr>
+                
+                <h2><i class="fas fa-plus-circle"></i> Custom Content Types</h2>
+                <form id="customTypeForm">
+                    <input type="text" id="customTypeName" placeholder="Nama Konten Baru (Misal: Tutorial Blender)" required>
+                    <input type="number" id="customTypeXP" placeholder="XP yang didapat (Misal: 450)" required min="10">
+                    <button type="submit" class="premiere-btn set-xp-btn add-custom-type-btn"></button>
+                </form>
+                
+                <hr>
+                
+                <h3>Active Content Types</h3>
+                <ul id="activeTypesList" class="content-checklist"> 
+                    </ul>
+                
+            </section>
+
+            <section class="panel panel-input">
+                <h2><i class="fas fa-layer-group"></i> Craft New Content</h2>
+                <form id="contentForm">
+                    <label for="contentType">Jenis Konten:</label> 
+                    <select id="contentType" required>
+                        </select>
+                    
+                    <label for="contentTitle">Judul Konten:</label>
+                    <input type="text" id="contentTitle" placeholder="Misalnya: Hardcore #5 - Diamond Mine">
+                    
+                    <button type="submit" class="premiere-btn upload-btn-custom"></button>
+                </form>
+
+                <hr>
+
+                <h2><i class="fas fa-scroll"></i> Content Log</h2>
+                <ul id="historyList" class="content-history">
+                    </ul>
+            </section>
+            
+            <section class="panel panel-bonus">
+                <h2><i class="fas fa-trophy"></i> Additional Quests</h2>
+                <ul id="bonusMissions" class="bonus-list">
+                    </ul>
+            </section>
+        </main>
+    </div>
+
+    <div id="customModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="modalTitle">Konfirmasi</h3>
+            <p id="modalMessage">Apakah Anda yakin?</p>
+            <div class="modal-actions" id="modalActions">
+                </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

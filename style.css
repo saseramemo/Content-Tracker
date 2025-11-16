@@ -1,0 +1,534 @@
+/* style.css */
+body {
+    background-color: #2e2e2e; 
+    color: #c0c0c0;
+    font-family: 'Minecraftia', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    margin: 0;
+    padding: 0;
+}
+
+.premiere-header {
+    background-color: #1e1e1e;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #5a5a5a;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sasera-icon {
+    width: 50px; 
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #003cffff;
+    image-rendering: pixelated; 
+}
+
+.premiere-header h1 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #003cffff;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+}
+
+/* FIX: Perataan Ikon di Header */
+.premiere-header h1 .fas {
+    vertical-align: top;
+    margin-right: 5px; 
+}
+
+
+.premiere-layout {
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+}
+
+.panel {
+    background-color: #383838;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    flex: 1; 
+    min-height: 85vh;
+}
+
+.panel-input {
+    flex: 1.5; 
+}
+
+.panel h2, .panel h3 {
+    color: #f0f0f0;
+    margin-top: 0;
+    border-bottom: 1px solid #5a5a5a;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.3);
+    /* FIX: Perataan Ikon di Panel */
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+.panel h2 .fas, .panel h3 .fas {
+    /* Pastikan ikon tidak terlalu besar dari teks */
+    font-size: 1em; 
+}
+
+/* Level Bar Styling */
+.level-bar-container {
+    background-color: #4a4a4a;
+    border-radius: 10px;
+    margin: 5px 0 15px;
+    height: 20px;
+    overflow: hidden;
+    border: 1px solid #003cffff; 
+}
+
+.level-bar {
+    background: linear-gradient(to right, #7FFF00, #32CD32); 
+    height: 100%;
+    transition: width 0.5s ease-in-out;
+    /* HAPUS TEXT-ALIGN: CENTER */
+    text-align: left; /* FIX: Geser teks ke kiri/off-center */
+    color: #1e1e1e;
+    font-weight: bold;
+    line-height: 20px;
+    font-size: 0.9em;
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
+    padding-left: 5px; /* Posisikan teks persentase sedikit ke kanan */
+}
+
+/* Form Styling */
+label {
+    display: block;
+    margin-top: 10px;
+    color: #003cffff;
+    font-weight: bold;
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.3);
+}
+
+input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    background-color: #4a4a4a;
+    border: 1px solid #5a5a5a;
+    color: #c0c0c0;
+    border-radius: 3px;
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+/* SET XP Styling */
+.set-xp-control {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.set-xp-control input {
+    flex-grow: 1;
+    margin-bottom: 0;
+}
+
+/* ==================================== */
+/* Custom Button Styling (Minecraft Assets - NO ICON, NO HTML TEXT) */
+/* ==================================== */
+
+.premiere-btn, .control-btn, .delete-btn {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain; 
+    color: transparent; /* Sembunyikan teks HTML */
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-image 0.1s ease-in-out;
+    text-shadow: none; 
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 0; 
+    box-sizing: border-box;
+    image-rendering: pixelated; 
+}
+
+/* SELESAI UPLOAD Button (1250x220px, rasio ~5.68:1) */
+.upload-btn-custom {
+    background-image: url('assets/SELESAI UPLOAD BUTTON.png');
+    height: 40px; 
+    width: calc(40px * 5.68); 
+    font-size: 1.1em; 
+}
+.upload-btn-custom:hover {
+    background-image: url('assets/SELESAI UPLOAD BUTTON SELECTED.png');
+}
+
+/* EXPORT Button (910x290px, rasio ~3.13:1) */
+.export-btn-custom {
+    background-image: url('assets/EXPORT BUTTON.png');
+    height: 35px; 
+    width: calc(35px * 3.13); 
+    font-size: 0.9em;
+}
+.export-btn-custom:hover {
+    background-image: url('assets/EXPORT BUTTON SELECTED.png');
+}
+
+/* IMPORT Button (910x290px, rasio ~3.13:1) */
+.import-btn-custom {
+    background-image: url('assets/IMPORT BUTTON.png');
+    height: 35px;
+    width: calc(35px * 3.13);
+    font-size: 0.9em;
+}
+.import-btn-custom:hover {
+    background-image: url('assets/IMPORT BUTTON SELECTED.png');
+}
+
+/* DELETE Button (910x290px, rasio ~3.13:1) */
+.delete-btn {
+    background-image: url('assets/DELETE BUTTON.png');
+    height: 30px; 
+    width: calc(30px * 3.13); 
+    font-size: 0.8em;
+}
+.delete-btn:hover {
+    background-image: url('assets/DELETE BUTTON SELECTED.png');
+}
+
+/* Set XP Button (910x290px, rasio ~3.13:1) */
+.set-xp-btn {
+    background-image: url('assets/SET BUTTON.png');
+    height: 35px; 
+    width: calc(35px * 3.13); 
+    font-size: 0.9em;
+}
+.set-xp-btn:hover {
+    background-image: url('assets/SET BUTTON SELECTED.png');
+}
+
+
+/* List Styling */
+.content-history, .bonus-list, .content-checklist {
+    list-style: none;
+    padding: 0;
+}
+
+.content-history li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4a4a4a;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    border: 1px solid #5a5a5a;
+}
+
+.bonus-list li {
+    border-left: 5px solid #ff0000; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4a4a4a;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    border: 1px solid #5a5a5a;
+}
+
+.bonus-list input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2); 
+    accent-color: #003cffff; 
+}
+
+.xp-badge {
+    background-color: #7FFF00; 
+    color: #1e1e1e;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.3);
+}
+
+/* Grass Block (500x500px, rasio 1:1) */
+.grass-block-bg {
+    background-image: url('assets/GRASSBLOCK.png');
+    background-size: 50px 50px; 
+    background-repeat: no-repeat;
+    background-position: right 10px center; 
+    padding-right: 70px; 
+    border: 1px solid #32CD32;
+    image-rendering: pixelated; 
+}
+
+/* Adjustments for icons (hanya jika ada ikon yang tersisa, seperti ikon kerajinan di list) */
+.premiere-btn .fas, .control-btn .fas, .delete-btn .fas {
+    /* Ikon di dalam tombol custom sekarang transparan, tapi kita pertahankan agar tidak terjadi kesalahan jika ada yang terlewat. */
+    color: transparent; 
+    text-shadow: none; 
+}
+
+/* Pastikan ikon di list dan heading yang tersisa tetap terlihat */
+.panel h2 .fas, .panel h3 .fas, .premiere-header h1 .fas {
+    color: #003cffff; 
+}
+/* style.css (Hanya bagian yang ditambahkan/diubah, sisanya dari revisi sebelumnya tetap sama) */
+
+/* ==================================== */
+/* Custom Modal Styling */
+/* ==================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Premiere Pro dark overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    visibility: hidden; /* Sembunyikan secara default */
+    opacity: 0;
+    transition: visibility 0.2s, opacity 0.2s;
+}
+
+.modal-overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: #383838; /* Panel color */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(255, 153, 0, 0.5); /* Glowing border */
+    max-width: 400px;
+    width: 90%;
+    border: 2px solid #003cffff;
+}
+
+#modalTitle {
+    color: #003cffff;
+    border-bottom: 1px solid #5a5a5a;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.3);
+}
+
+#modalMessage {
+    color: #f0f0f0;
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* ==================================== */
+/* Custom Button Styling (Minecraft Assets - Lanjutan) */
+/* Rasio 910x290px (~3.13:1) */
+/* ==================================== */
+.modal-btn {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain; 
+    color: transparent; 
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-image 0.1s ease-in-out;
+    text-shadow: none; 
+    padding: 0; 
+    box-sizing: border-box;
+    image-rendering: pixelated;
+    
+    height: 35px; /* Tinggi standar untuk tombol modal */
+    width: calc(35px * 3.13); 
+    flex-grow: 1; /* Agar tombol mengisi ruang yang tersedia */
+    max-width: 120px;
+}
+
+/* BATAL Button */
+.batal-btn {
+    background-image: url('assets/BATAL BUTTON.png');
+}
+.batal-btn:hover {
+    background-image: url('assets/BATAL BUTTON SELECTED.png');
+}
+
+/* TIDAK Button */
+.tidak-btn {
+    background-image: url('assets/TIDAK BUTTON.png');
+}
+.tidak-btn:hover {
+    background-image: url('assets/TIDAK BUTTON SELECTED.png');
+}
+
+/* YA Button */
+.ya-btn {
+    background-image: url('assets/YA BUTTON.png');
+}
+.ya-btn:hover {
+    background-image: url('assets/YA BUTTON SELECTED.png');
+}
+
+/* Pastikan style yang sudah ada tetap dipertahankan */
+.delete-btn {
+    /* ... style delete-btn dari revisi sebelumnya ... */
+    background-image: url('assets/DELETE BUTTON.png');
+    height: 30px; 
+    width: calc(30px * 3.13); 
+    font-size: 0.8em;
+}
+.delete-btn:hover {
+    background-image: url('assets/DELETE BUTTON SELECTED.png');
+}
+/* ... (lanjutkan CSS lama di sini) ... */
+
+/* style.css (Tidak ada perubahan fungsional yang signifikan, hanya menyalin ulang kode terakhir untuk kelengkapan) */
+
+/* ... (Kode CSS dari revisi sebelumnya) ... */
+.panel h2, .panel h3 {
+    /* ... */
+    /* Ini memastikan ikon Manual XP Points, Project Blocks, dan Content Log tetap rata tengah dengan teks */
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+/* ... (lanjutkan kode CSS) ... */
+/* style.css (Perubahan minor pada tata letak formulir Custom Content Type) */
+
+/* ... (Kode CSS sebelumnya) ... */
+
+/* CUSTOM CONTENT TYPE FORM STYLING */
+#customTypeForm input[type="text"], #customTypeForm input[type="number"] {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+/* Tombol Add Custom Type */
+#customTypeForm .set-xp-btn {
+    width: 100%; /* Ditetapkan di inline style, tapi disiapkan di CSS juga */
+    max-width: none; 
+    height: 35px;
+    background-size: 80% 100%; /* Sedikit menyesuaikan ukuran gambar tombol agar teks "ADD CUSTOM TYPE" terlihat jelas (Ini HANYA JIKA GAMBAR TOMBOL SET DIGUNAKAN) */
+}
+
+/* ... (lanjutkan kode CSS lainnya) ... */
+
+/* style.css (Perubahan minor) */
+
+/* ... (Kode CSS sebelumnya) ... */
+
+/* CUSTOM CONTENT TYPE FORM STYLING */
+#customTypeForm input[type="text"], #customTypeForm input[type="number"] {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+/* Tombol ADD CUSTOM TYPE - Anti-Stretch */
+.add-custom-type-btn {
+    width: 150px !important; /* Batalkan width: 100% */
+    padding: 5px 15px !important; /* Tambahkan padding agar tombol memiliki ukuran alami */
+    margin-top: 5px;
+    display: block; /* Agar tombol berada di baris baru */
+}
+
+
+/* Styling untuk item di daftar Custom Content Types */
+#activeTypesList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    font-size: 0.9em;
+}
+
+/* Tombol Hapus Jenis Konten */
+.delete-type-btn {
+    background-color: #c0392b; 
+    color: white;
+    border: none;
+    padding: 3px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.7em;
+    transition: background-color 0.2s;
+}
+
+.delete-type-btn:hover {
+    background-color: #e74c3c;
+}
+
+/* ... (lanjutkan kode CSS lainnya) ... */
+/* style.css (Revisi pada bagian tombol DELETE) */
+
+/* ... (Kode CSS sebelumnya) ... */
+
+/* ==================================== */
+/* Custom Button Styling (Minecraft Assets) */
+/* ==================================== */
+/* Tombol Dasar (Digunakan untuk semua tombol gambar, termasuk delete) */
+.premiere-btn, .modal-btn, .delete-btn, .delete-type-btn {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain; 
+    color: white; /* Warna teks untuk tombol non-gambar */
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-image 0.1s ease-in-out;
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
+    padding: 0; 
+    box-sizing: border-box;
+    image-rendering: pixelated;
+    height: 35px; /* Tinggi standar untuk kontrol */
+    /* ... (CSS lainnya untuk tombol seperti upload-btn-custom, set-xp-btn, dll.) ... */
+}
+
+/* --- DELETE BUTTONS (Untuk Content Log dan Content Type) --- */
+/* Menyeragamkan semua tombol hapus menggunakan aset gambar */
+.delete-btn, .delete-type-btn {
+    height: 30px; /* Sedikit lebih kecil agar tidak terlalu dominan */
+    width: calc(30px * 3.13); /* Lebar berdasarkan rasio 910x290 */
+    font-size: 0; /* Sembunyikan teks/ikon bawaan */
+    padding: 0;
+    
+    /* Aset Gambar Default */
+    background-image: url('assets/DELETE BUTTON.png');
+    background-size: 100% 100%; /* Pastikan gambar mengisi tombol */
+}
+
+.delete-btn:hover, .delete-type-btn:hover {
+    /* Aset Gambar Selected */
+    background-image: url('assets/DELETE BUTTON SELECTED.png');
+}
+
+/* Perbaikan tata letak spesifik untuk tombol di Content Type List */
+#activeTypesList li .delete-type-btn {
+    width: 90px; /* Beri lebar tetap yang cukup terlihat */
+    height: 25px; /* Sesuaikan tinggi agar pas di dalam list item */
+    background-size: contain;
+}
+
+/* ... (lanjutkan kode CSS lainnya) ... */
